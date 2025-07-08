@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Sports Quiz</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Navigation Bar -->
+    <nav class="admin-navbar">
+        <div class="container">
+            <div class="nav-left">
+                 <div class="admin-logo" id="admin-logo">Admin Dashboard</div>
+                 <a href="index.html" class="back-btn" id="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Quiz
+                 </a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="logout-btn" class="btn btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <div class="login-container" id="login-container">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="error-message" id="login-error"></div>
+            </form>
+        </div>
+
+        <div class="dashboard-container" id="dashboard-container" style="display: none;">
+            <div class="admin-content">
+                <div class="admin-sidebar">
+                    <ul>
+                        <li class="active" data-section="categories">Categories</li>
+                        <li data-section="questions">Questions</li>
+                    </ul>
+                </div>
+
+                <div class="admin-main">
+                    <section id="categories-section" class="admin-section">
+                        <div class="section-header">
+                            <h3>Categories</h3>
+                            <button id="add-category-btn" class="btn">Add Category</button>
+                        </div>
+                        <div class="category-list" id="admin-category-list">
+                            <!-- Categories will be loaded here -->
+                        </div>
+                    </section>
+
+                    <section id="questions-section" class="admin-section" style="display: none;">
+                        <div class="section-header">
+                            <h3>Questions</h3>
+                            <div class="category-selector">
+                                <select id="question-category-select">
+                                    <option value="">Select a category</option>
+                                </select>
+                                <button id="add-question-btn" class="btn" disabled>Add Question</button>
+                            </div>
+                        </div>
+                        <div class="question-list" id="admin-question-list">
+                            <!-- Questions will be loaded here -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-category-title">Add New Category</h3>
+            <form id="category-form">
+                <input type="hidden" id="category-id">
+                <div class="form-group">
+                    <label for="category-name">Category Name</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div class="modal" id="question-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-question-title">Add New Question</h3>
+            <form id="question-form">
+                <input type="hidden" id="question-id">
+                <input type="hidden" id="question-category-id">
+                <div class="form-group">
+                    <label for="question-text">Question</label>
+                    <textarea id="question-text" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="question-answer">Answer</label>
+                    <textarea id="question-answer" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <h3 id="confirm-message">Are you sure?</h3>
+            <div class="modal-actions">
+                <button id="confirm-cancel" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-ok" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
